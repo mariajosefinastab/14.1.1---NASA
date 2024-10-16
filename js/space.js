@@ -38,28 +38,38 @@ function displayResults(items) { //Parámetro items recibe un array de objetos, 
         return;
     }
 
+    const row = document.createElement('div');
+    row.classList.add('row');
+
     //iteración sobre los resultados
     items.forEach(item => {  //con forEach recorro cada objeto item que está dentro del array items
         const { links, data } = item; //Desestructuro: extraigo las propiedades links y data del objeto item.links(contiene los enlaces a las imágenes) y data(contiene la información descriptiva)
 
 
-        if (links && data.length > 0) { //verifico si hay un enlace y datos
+        if (links && links.length > 0 && data.length > 0) { //verifico si hay un enlace y datos
             const imgLink = links[0].href; //obtengo primer enlace
             const title = data[0].title || 'Sin título';
             const description = data[0].description || 'Sin descripción';
             const date = data[0].date_created || 'Sin fecha';
 
+            const col = document.createElement('div');
+            col.classList.add('col-md-4', 'mb-4'); // Columna para las tarjetas
+
+
             //creo resultados con el estilo de bootstrap
-            const resultItem = document.createElement('div');
-            resultItem.classList.add('mb-4'); // Espaciado entre elementos (mb-4 agrega margen inferior) (img-fluid hace la img responsive)
-            resultItem.innerHTML = ` 
-                <h2>${title}</h2>
-                <img src="${imgLink}" alt="${title}" class="img-fluid" style="max-width: 100%;"> 
-                <p>${description}</p>
-                <p><strong>Fecha:</strong> ${date}</p>
-                <hr>
+            col.innerHTML = `
+                <div class="card">
+                    <img src="${imgLink}" class="card-img-top" alt="${title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${title}</h5>
+                        <p class="card-text">${description}</p>
+                        <p class="card-text"><small class="text-muted">Fecha: ${date}</small></p>
+                    </div>
+                </div>
             `;
-            contenedor.appendChild(resultItem);
+            row.appendChild(col); // agrego la columna a la fila
         }
     });
+
+    contenedor.appendChild(row); // agrego la fila al contenedor
 }
