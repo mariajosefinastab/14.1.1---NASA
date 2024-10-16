@@ -1,6 +1,6 @@
 document.getElementById('btnBuscar').addEventListener('click', function() { //Selecciono el botón de búsqueda y le agrego el addEventListener para saber si se tocó, si se tocó se ejecuta
                                                                             //la función dentro del segundo argumento
-    const query = document.getElementById('inputBuscar').ariaValueMax.trim(); //Obtener valor de búsqueda, selecciono el campo de entrada de búsqueda(input) y me guardo el valor, con trim() borro espacios en blanco al principio y al final del texto
+    const query = document.getElementById('inputBuscar').value.trim(); //Obtener valor de búsqueda, selecciono el campo de entrada de búsqueda(input) y me guardo el valor, con trim() borro espacios en blanco al principio y al final del texto
     if (!query) { //Si la query(entrada del usuario), está vacía muestro una alerta
         alert('Por favor ingresa un término de búsqueda.');
         return;
